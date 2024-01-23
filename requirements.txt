@@ -1,0 +1,5 @@
+transformers
+matplotlib
+accelerate
+SentencePiece
+scipy
