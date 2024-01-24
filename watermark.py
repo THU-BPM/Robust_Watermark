@@ -9,6 +9,7 @@ from train_watermark_model import TransformModel
 import random
 import os
 import json
+import jieba
 
 
 class WatermarkBase:
@@ -88,14 +89,32 @@ class WatermarkContext(WatermarkBase):
         sentence = self.target_tokenizer.decode(input_ids, skip_special_tokens=True)
         words_2d = self.get_text_split(sentence)
         if len(words_2d[-1]) == self.chunk_length:
-            return ' '.join([' '.join(group) for group in words_2d])
+            return ''.join([''.join(group) for group in words_2d]).strip()
         else:
-            return ' '.join([' '.join(group) for group in words_2d[:-1]])
-    
+            return ''.join([''.join(group) for group in words_2d[:-1]]).strip()
+        
     def get_text_split(self, sentence):
-        words = sentence.split()
-        words_2d = [words[i:i + self.chunk_length] for i in range(0, len(words), self.chunk_length)]
+        words = list(jieba.cut(sentence))
+
+        non_space_indices = [index for index, word in enumerate(words) if word.strip()]
+
+        words_2d = []
+        chunk_start = 0
+        for i in range(0, len(non_space_indices), self.chunk_length):
+            chunk_end = i + self.chunk_length
+
+            chunk_end = min(chunk_end, len(non_space_indices))
+
+            chunk_indices = non_space_indices[:chunk_end]
+
+            if chunk_indices:
+                chunk = words[chunk_start:chunk_indices[-1] + 1]
+                words_2d.append(chunk)
+            
+            chunk_start = chunk_indices[-1] + 1
+
         return words_2d
+
 
     def scale_vector(self, v):
         mean = np.mean(v)
@@ -110,9 +129,10 @@ class WatermarkContext(WatermarkBase):
         word_2d = self.get_text_split(text)
         all_value = []
         for i in range(1, len(word_2d)):
-            context_sentence = ' '.join([' '.join(group) for group in word_2d[0:i]])
-            current_sentence = ' '.join(word_2d[i])
-            if len(context_sentence.split(' ')) < 40:
+            context_sentence = ''.join([''.join(group) for group in word_2d[0:i]]).strip()
+            current_sentence = ''.join(word_2d[i]).strip()
+            
+            if len(list(jieba.cut(context_sentence))) < 40:
                 continue
             context_embedding = self.get_embedding(context_sentence)
             output = self.transform_model(context_embedding).cpu()[0].numpy()
