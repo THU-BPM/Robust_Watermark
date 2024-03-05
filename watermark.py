@@ -95,6 +95,7 @@ class WatermarkContext(WatermarkBase):
         
     def get_text_split(self, sentence):
         words = list(jieba.cut(sentence))
+        words = [word.strip() for word in words if word.strip()]
 
         non_space_indices = [index for index, word in enumerate(words) if word.strip()]
 
