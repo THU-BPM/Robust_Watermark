@@ -1,4 +1,12 @@
+<!-- ![SIR](./figs/logo.png) -->
+<div style="text-align: center;">
+<img src="./figs/logo.png" alt="替代文本" title="可选标题" width="200" height="200">
+</div>
+
 # A Semantic Invariant Robust (SIR) Watermark for Large Language Models
+
+
+![SIR](./figs/r-robust-model.png)
 
 ## Conda Environment
 
