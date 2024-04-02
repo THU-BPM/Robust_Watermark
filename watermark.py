@@ -95,7 +95,6 @@ class WatermarkContext(WatermarkBase):
         
     def get_text_split(self, sentence):
         words = list(jieba.cut(sentence))
-        words = [word.strip() for word in words if word.strip()]
 
         non_space_indices = [index for index, word in enumerate(words) if word.strip()]
 
@@ -130,8 +129,8 @@ class WatermarkContext(WatermarkBase):
         word_2d = self.get_text_split(text)
         all_value = []
         for i in range(1, len(word_2d)):
-            context_sentence = ' '.join([' '.join(group) for group in word_2d[0:i]]).strip()
-            current_sentence = ' '.join(word_2d[i]).strip()
+            context_sentence = ''.join([''.join(group) for group in word_2d[0:i]]).strip()
+            current_sentence = ''.join(word_2d[i]).strip()
             
             if len(list(jieba.cut(context_sentence))) < 40:
                 continue
