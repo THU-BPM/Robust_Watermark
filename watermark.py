@@ -130,8 +130,8 @@ class WatermarkContext(WatermarkBase):
         word_2d = self.get_text_split(text)
         all_value = []
         for i in range(1, len(word_2d)):
-            context_sentence = ''.join([''.join(group) for group in word_2d[0:i]]).strip()
-            current_sentence = ''.join(word_2d[i]).strip()
+            context_sentence = ' '.join([' '.join(group) for group in word_2d[0:i]]).strip()
+            current_sentence = ' '.join(word_2d[i]).strip()
             
             if len(list(jieba.cut(context_sentence))) < 40:
                 continue
