@@ -76,11 +76,13 @@ We also provide implementations of several watermark removal attacks in `attacks
 If you find SIR useful or use SIR (model, code, dataset, etc.) in your research, please cite it in your publications.
 
 ```
-@article{liu2023semantic,
-  title={A semantic invariant robust watermark for large language models},
-  author={Liu, Aiwei and Pan, Leyi and Hu, Xuming and Meng, Shiao and Wen, Lijie},
-  journal={arXiv preprint arXiv:2310.06356},
-  year={2023}
+@inproceedings{
+  liu2024a,
+  title={A Semantic Invariant Robust Watermark for Large Language Models},
+  author={Aiwei Liu and Leyi Pan and Xuming Hu and Shiao Meng and Lijie Wen},
+  booktitle={The Twelfth International Conference on Learning Representations},
+  year={2024},
+  url={https://openreview.net/forum?id=6p8lpe4MNf}
 }
 ```
 
