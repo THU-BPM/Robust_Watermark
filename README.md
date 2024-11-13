@@ -6,7 +6,8 @@
 
 ## News
 
-💡 **_<span style="color: #0366d6;">Our SIR watermark has been integrated into [MarkLLM](https://github.com/THU-BPM/MarkLLM), an open-source toolkit for LLM watermarking. You can now try out our watermarking method in the MarkLLM repository!</span>_**
+💡 **_<span style="color: #0366d6;">We recommend using [MarkLLM](https://github.com/THU-BPM/MarkLLM), our official toolkit for LLM watermarking, which provides a more user-friendly implementation of SIR watermark. For the latest updates and easiest deployment, please visit the MarkLLM repository!</span>_**
+
 
 ## Conda Environment
 
